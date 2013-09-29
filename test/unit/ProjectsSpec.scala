@@ -1,7 +1,8 @@
+package unit
+
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
-
 import play.api.test._
 import play.api.test.Helpers._
 
@@ -11,16 +12,16 @@ import play.api.test.Helpers._
  * For more information, consult the wiki.
  */
 @RunWith(classOf[JUnitRunner])
-class ProfileSpec extends Specification {
+class ProjectsSpec extends Specification {
 
-  "Profile" should {
+  "Projects" should {
 
     "render the index page" in new WithApplication {
-      val home = route(FakeRequest(GET, "/profile")).get
+      val home = route(FakeRequest(GET, "/projects")).get
 
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "text/html")
-      contentAsString(home) must contain("Your profile")
+      contentAsString(home) must contain("Your projects")
     }
   }
 }
