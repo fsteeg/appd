@@ -1,0 +1,41 @@
+{
+	"id":"DEVK",
+	"location":{
+		"lon":6.97609,
+		"lat":50.958299
+	},
+	"attributes":{
+		"name":"DEVK",
+		"user":"fsteeg"
+	},
+	"priorities":{
+		"Ort":{
+			"score":"9",
+			"comment":"Köln"
+		},
+		"Tätigkeit":{
+			"score":"9",
+			"comment":"Entwickeln"
+		},
+		"Perspektive":{
+			"score":"9",
+			"comment":"Versicherung"
+		},
+		"Arbeitsbed.":{
+			"score":"0",
+			"comment":"unklar"
+		}
+		
+	},
+	"skills":{
+		"Java":{
+			"score":"9",
+			"comment":"Java etc"
+		},
+		"Eclipse":{
+			"score":"2",
+			"comment":"als IDE"
+		}
+		
+	}
+}

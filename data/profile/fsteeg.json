@@ -1,0 +1,39 @@
+{
+	"id":"fsteeg",
+	"attributes":{
+		"name":"Fabian",
+		"mail":"fsteeg@gmail.com",
+		"password":"$2a$10$kABK7UKUP4.sR/IhkKDFg.3IdH95smdskV/Wh2XMgSI7iGDbwMi.S",
+		"expertise":"Programming"
+	},
+	"priorities":[
+		{
+			"label":"Ort",
+			"comment":"Vor Ort, mit dem Rad erreichbar"
+		},
+		{
+			"label":"Tätigkeit",
+			"comment":"Was man konkret tut (Entwickeln) und nicht tut (Meetings, Reisen)"
+		},
+		{
+			"label":"Perspektive",
+			"comment":"Langfristige Perspektive"
+		},
+		{
+			"label":"Arbeitsbed.",
+			"comment":"Arbeitszeiten, Büros, Ausstattung, etc."
+		}
+		
+	],
+	"skills":[
+		{
+			"label":"Java",
+			"comment":"Java, 10 Jahre"
+		},
+		{
+			"label":"Eclipse",
+			"comment":"Eclipse, 8 Jahre"
+		}
+		
+	]
+}

@@ -1,0 +1,41 @@
+{
+	"id":"Tasktop",
+	"location":{
+		"lon":6.92727,
+		"lat":50.95313
+	},
+	"attributes":{
+		"name":"Tasktop",
+		"user":"fsteeg"
+	},
+	"priorities":{
+		"Ort":{
+			"score":"8",
+			"comment":"Köln, zuhause, aber regelm. Reisen"
+		},
+		"Tätigkeit":{
+			"score":"9",
+			"comment":"Entwickeln, Integrations"
+		},
+		"Perspektive":{
+			"score":"7",
+			"comment":"erfolgreiche Firma, Startup"
+		},
+		"Arbeitsbed.":{
+			"score":"7",
+			"comment":"zuhause, tägliche Telek., etc."
+		}
+		
+	},
+	"skills":{
+		"Java":{
+			"score":"9",
+			"comment":"Tasktop"
+		},
+		"Eclipse":{
+			"score":"9",
+			"comment":"Tasktop"
+		}
+		
+	}
+}

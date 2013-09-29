@@ -1,0 +1,48 @@
+{
+	"id":"hbz",
+	"location":{
+		"lon":6.935512,
+		"lat":50.93406
+	},
+	"attributes":{
+		"name":"hbz",
+		"user":"fsteeg"
+	},
+	"priorities":{
+		"Ort":{
+			"score":"9",
+			"comment":"Köln"
+		},
+		"Tätigkeit":{
+			"score":"9",
+			"comment":"Software-Entwickler"
+		},
+		"Perspektive":{
+			"score":"9",
+			"comment":"Grundlage: feste Stelle öD"
+		},
+		"Arbeitsbed.":{
+			"score":"8",
+			"comment":"ruhig, 1-2 Personen/Büro, gute Ausstattung"
+		}
+		
+	},
+	"links":[
+		{
+			"label":"homepage",
+			"url":"http://www.hbz-nrw.de"
+		}
+		
+	],
+	"skills":{
+		"Java":{
+			"score":"9",
+			"comment":"Java"
+		},
+		"Eclipse":{
+			"score":"6",
+			"comment":"MF-IDE"
+		}
+		
+	}
+}
