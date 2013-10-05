@@ -1,7 +1,13 @@
-@(message: String)
+@import scala.xml.XML
 
-@main("Welcome to Play") {
+@rss(name: String, feed: String) = {
+	<h1>@name</h1>
+	@for(item <- (XML.loadString(feed) \\ "item")) {
+		@Html((item \ "description").text)
+	}
+}
 
-    @play20.welcome(message)
-
+@main("Welcome to appd") {
+	@rss("Notes", Notes.notesAsRss("data/notes").toString)
+	@rss("Posts", Notes.notesAsRss("data/posts").toString)
 }
