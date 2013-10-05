@@ -1,8 +1,37 @@
-@(json: play.api.libs.json.JsValue)
+@(profile: models.Profile)
 
 @import play.api.libs.json._
 
 @main("Your profile") {
 	<h1>Your profile</h1>
-	<pre>@Html(Json.prettyPrint(json).toString)</pre>
+
+	<h2>ID</h2>
+	@profile.id
+
+	<h2>Priorities</h2>
+	<dl>
+	@profile.priorities.map { p =>
+		<dt>@p("label")</dt>
+		<dd>@p("comment")</dd>
+	}
+	</dl>
+
+	<h2>Skills</h2>
+	<dl>
+	@profile.skills.map { p =>
+		<dt>@p("label")</dt>
+		<dd>@p("comment")</dd>
+	}
+	</dl>
+
+	<h2>Attributes</h2>
+	<dl>
+	@profile.attributes.map { p =>
+		<dt>@p._1</dt>
+		<dd>@p._2</dd>
+	}
+	</dl>
+
+	<h2>JSON</h2>
+	<pre>@Html(Json.prettyPrint(profile.json).toString)</pre>
 }

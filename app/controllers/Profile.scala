@@ -11,7 +11,8 @@ object Profile extends Controller {
     implicit val codec = scala.io.Codec.UTF8
     val jsonSource = Source.fromFile("data/profile/fsteeg.json")
     val jsonValue = Json.parse(jsonSource.mkString)
-    Ok(views.html.profile(jsonValue)).as("text/html; charset=utf-8")
+    val profile = models.Profile(jsonValue)
+    Ok(views.html.profile(profile)).as("text/html; charset=utf-8")
   }
 
 }
