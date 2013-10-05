@@ -1,0 +1,8 @@
+@(json: play.api.libs.json.JsValue)
+
+@import play.api.libs.json._
+
+@main("Your profile") {
+	<h1>Your profile</h1>
+	<pre>@Html(Json.prettyPrint(json).toString)</pre>
+}
