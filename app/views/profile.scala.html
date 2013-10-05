@@ -1,37 +1,62 @@
-@(profile: models.Profile)
+@(user: models.User, jobs: Seq[Job])
 
 @import play.api.libs.json._
 
-@main("Your profile") {
-	<h1>Your profile</h1>
+@main("Profile") {
+	<h1>Profile</h1>
+	@userData(user)
 
-	<h2>ID</h2>
-	@profile.id
+	<h1>Jobs</h1>
+	@jobs.map { job => @jobData(job) }
+}
 
-	<h2>Priorities</h2>
+@userData(profile: models.User) = {
+	<h1>@profile.id</h1>
+	@userDataDescription("Priorities", profile.priorities)
+	@userDataDescription("Skills", profile.skills)
+	@attributes(profile.attributes)
+}
+
+@jobData(job: models.Job) = {
+	<h1>@job.id</h1>
+	<h2>Scores</h2>
 	<dl>
-	@profile.priorities.map { p =>
+		<dt>priority</dt>
+		<dd>@job.priorities.score()</dd>
+		<dt>skill</dt>
+		<dd>@job.skills.score()</dd>
+	</dl>
+	@jobDataDescription("Priorities", job.priorities)
+	@jobDataDescription("Skills", job.skills)
+	@attributes(job.attributes)
+}
+
+@userDataDescription(kind: String, data: List[Map[String, String]]) = {
+	<h2>@kind</h2>
+	<dl>
+	@data.map { p =>
 		<dt>@p("label")</dt>
 		<dd>@p("comment")</dd>
 	}
 	</dl>
+}
 
-	<h2>Skills</h2>
+@jobDataDescription(kind: String, data: models.Criterion) = {
+	<h2>@kind</h2>
 	<dl>
-	@profile.skills.map { p =>
-		<dt>@p("label")</dt>
-		<dd>@p("comment")</dd>
+	@data.data.map { p =>
+		<dt>@p._1</dt>
+		<dd>@p._2("score"): @p._2("comment")</dd>
 	}
 	</dl>
+}
 
+@attributes(data: Map[String, String]) = {
 	<h2>Attributes</h2>
 	<dl>
-	@profile.attributes.map { p =>
+	@data.map { p =>
 		<dt>@p._1</dt>
 		<dd>@p._2</dd>
 	}
 	</dl>
-
-	<h2>JSON</h2>
-	<pre>@Html(Json.prettyPrint(profile.json).toString)</pre>
 }

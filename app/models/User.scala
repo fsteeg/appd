@@ -3,7 +3,7 @@ package models
 import play.api.libs.json.JsValue
 import play.api.libs.json.Json
 
-case class Profile(json: JsValue) {
+case class User(json: JsValue) {
 
   class NoId(s: String) extends RuntimeException(s)
   class NoPriorities(s: String) extends RuntimeException(s)
@@ -11,8 +11,7 @@ case class Profile(json: JsValue) {
   class NoAttributes(s: String) extends RuntimeException(s)
 
   lazy val id = (json \ "id").
-    asOpt[String].
-    getOrElse(throw new NoId(json.toString))
+    asOpt[String].getOrElse(throw new NoId(json.toString))
   lazy val priorities = (json \ "priorities").
     asOpt[List[Map[String, String]]].
     getOrElse(throw new NoPriorities(json.toString))
