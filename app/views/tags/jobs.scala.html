@@ -1,29 +1,38 @@
-@(caption: String, jobs: Seq[Job])
+@(caption: String, jobs: Seq[Job], criterionLabel: String)
 
 @import play.api.libs.json._
 
-<h1>@caption, by priorities</h1>
-@jobs.sortBy(_.priorities.score())(Ordering[String].reverse).map { job =>
-	@jobData("Priorities", job, job.priorities)
+@criterionLabel match {
+
+  case "priorities" => {
+    <h1>@caption, by @criterionLabel</h1>
+    @jobsSection(job => job.priorities)
+  }
+
+  case "skills" => {
+	<h1>@caption, by @criterionLabel</h1>
+    @jobsSection(job => job.skills)
+  }
 }
 
-<h1>@caption, by skills</h1>
-@jobs.sortBy(_.skills.score())(Ordering[String].reverse).map { job =>
-	@jobData("Skills", job, job.skills)
+@jobsSection(criterionFun: Job => models.Criterion) = {
+	@jobs.sortBy(criterionFun(_).score())(Ordering[String].reverse).map { job =>
+		@jobData(criterionLabel.capitalize, job, criterionFun(job))
+	}
 }
 
-@jobData(label: String, job: models.Job, data: models.Criterion) = {
+@jobData(label: String, job: models.Job, criterion: models.Criterion) = {
 	<h1>@job.id</h1>
 	<h2>Score</h2>
-	@data.score()
-	@jobDataDescription(label, data)
+	@criterion.score()
+	@jobDataDescription(label, criterion)
 	@tags.attributes(job.attributes)
 }
 
-@jobDataDescription(kind: String, data: models.Criterion) = {
-	<h2>@kind</h2>
+@jobDataDescription(label: String, criterion: models.Criterion) = {
+	<h2>@label</h2>
 	<dl>
-	@data.data.map { p =>
+	@criterion.data.map { p =>
 		<dt>@p._1</dt>
 		<dd>@p._2("score"): @p._2("comment")</dd>
 	}

@@ -17,8 +17,12 @@
         <p>
             <a href="@routes.Application.index">index</a> | 
             <a href="@routes.Profile.index">profile</a> | 
-            <a href="@routes.Jobs.index">jobs</a> |
-            <a href="@routes.Projects.index">projects</a> | 
+            jobs by 
+            <a href="@routes.Jobs.index("priorities")">priorities</a>, 
+            <a href="@routes.Jobs.index("skills")">skills</a> |
+            projects by 
+            <a href="@routes.Projects.index("priorities")">priorities</a>, 
+            <a href="@routes.Projects.index("skills")">skills</a> |
             <a href="@routes.Notes.index">notes</a>, 
             <a href="@routes.Posts.index">posts</a> @feedIcon
         </p>
