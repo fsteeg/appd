@@ -21,7 +21,9 @@ class ProjectsSpec extends Specification {
 
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "text/html")
-      contentAsString(home) must contain("Your projects")
+      contentAsString(home) must contain("Projects")
+      contentAsString(home) must contain("Scores")
+      contentAsString(home) must contain("Zest")
     }
   }
 }

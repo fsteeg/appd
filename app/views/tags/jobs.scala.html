@@ -1,0 +1,30 @@
+@(caption: String, jobs: Seq[Job])
+
+@import play.api.libs.json._
+
+<h1>@caption</h1>
+@jobs.map { job => @jobData(job) }
+
+@jobData(job: models.Job) = {
+	<h1>@job.id</h1>
+	<h2>Scores</h2>
+	<dl>
+		<dt>priority</dt>
+		<dd>@job.priorities.score()</dd>
+		<dt>skill</dt>
+		<dd>@job.skills.score()</dd>
+	</dl>
+	@jobDataDescription("Priorities", job.priorities)
+	@jobDataDescription("Skills", job.skills)
+	@tags.attributes(job.attributes)
+}
+
+@jobDataDescription(kind: String, data: models.Criterion) = {
+	<h2>@kind</h2>
+	<dl>
+	@data.data.map { p =>
+		<dt>@p._1</dt>
+		<dd>@p._2("score"): @p._2("comment")</dd>
+	}
+	</dl>
+}

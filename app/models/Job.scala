@@ -1,6 +1,9 @@
 package models
 
 import play.api.libs.json.JsValue
+import scala.io.Source
+import play.api.libs.json.Json
+import java.io.File
 
 case class Criterion(
   data: Map[String, Map[String, String]],
@@ -47,5 +50,12 @@ case class Job(json: JsValue, user: User) {
       score
     }
     res.mkString
+  }
+}
+
+object Jobs {
+  def fromDirectory(location: String, user: User) = {
+    for (file <- new File(location).listFiles())
+      yield models.Job(Json.parse(Source.fromFile(file).mkString), user)
   }
 }

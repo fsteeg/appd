@@ -1,0 +1,36 @@
+{
+	"id":"Zest",
+	"attributes":{
+		"user":"fsteeg",
+		"label":"Zest",
+		"description":"Eclipse GEF Zest"
+	},
+	"priorities":{
+		"Ort":{
+			"score":"9",
+			"comment":"zuhause"
+		},
+		"Tätigkeit":{
+			"score":"8",
+			"comment":"Entwickeln, Maintenance"
+		},
+		"Perspektive":{
+			"score":"8",
+			"comment":"Eclipse GEF"
+		},
+		"Arbeitsbed.":{
+			"score":"9",
+			"comment":"zuhause"
+		}
+	},
+	"skills":{
+		"Java":{
+			"score":"9",
+			"comment":"voll"
+		},
+		"Eclipse":{
+			"score":"9",
+			"comment":"voll"
+		}
+	}
+}

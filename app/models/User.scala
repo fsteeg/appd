@@ -2,6 +2,7 @@ package models
 
 import play.api.libs.json.JsValue
 import play.api.libs.json.Json
+import scala.io.Source
 
 case class User(json: JsValue) {
 
@@ -21,4 +22,13 @@ case class User(json: JsValue) {
   lazy val attributes = (json \ "attributes").
     asOpt[Map[String, String]].
     getOrElse(throw new NoAttributes(json.toString))
+}
+
+object Users {
+  def fromFile(location: String) = {
+    implicit val codec = scala.io.Codec.UTF8
+    val jsonSource = Source.fromFile(location)
+    val jsonValue = Json.parse(jsonSource.mkString)
+    User(jsonValue)
+  }
 }

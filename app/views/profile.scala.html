@@ -5,30 +5,14 @@
 @main("Profile") {
 	<h1>Profile</h1>
 	@userData(user)
-
-	<h1>Jobs</h1>
-	@jobs.map { job => @jobData(job) }
+	@tags.jobs("Jobs", jobs)
 }
 
 @userData(profile: models.User) = {
 	<h1>@profile.id</h1>
 	@userDataDescription("Priorities", profile.priorities)
 	@userDataDescription("Skills", profile.skills)
-	@attributes(profile.attributes)
-}
-
-@jobData(job: models.Job) = {
-	<h1>@job.id</h1>
-	<h2>Scores</h2>
-	<dl>
-		<dt>priority</dt>
-		<dd>@job.priorities.score()</dd>
-		<dt>skill</dt>
-		<dd>@job.skills.score()</dd>
-	</dl>
-	@jobDataDescription("Priorities", job.priorities)
-	@jobDataDescription("Skills", job.skills)
-	@attributes(job.attributes)
+	@tags.attributes(profile.attributes)
 }
 
 @userDataDescription(kind: String, data: List[Map[String, String]]) = {
@@ -37,26 +21,6 @@
 	@data.map { p =>
 		<dt>@p("label")</dt>
 		<dd>@p("comment")</dd>
-	}
-	</dl>
-}
-
-@jobDataDescription(kind: String, data: models.Criterion) = {
-	<h2>@kind</h2>
-	<dl>
-	@data.data.map { p =>
-		<dt>@p._1</dt>
-		<dd>@p._2("score"): @p._2("comment")</dd>
-	}
-	</dl>
-}
-
-@attributes(data: Map[String, String]) = {
-	<h2>Attributes</h2>
-	<dl>
-	@data.map { p =>
-		<dt>@p._1</dt>
-		<dd>@p._2</dd>
 	}
 	</dl>
 }

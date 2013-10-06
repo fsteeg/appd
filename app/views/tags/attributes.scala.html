@@ -1,0 +1,9 @@
+@(data: Map[String, String])
+
+<h2>Attributes</h2>
+<dl>
+@data.map { p =>
+	<dt>@p._1</dt>
+	<dd>@p._2</dd>
+}
+</dl>
