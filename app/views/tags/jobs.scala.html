@@ -2,20 +2,21 @@
 
 @import play.api.libs.json._
 
-<h1>@caption</h1>
-@jobs.map { job => @jobData(job) }
+<h1>@caption, by priorities</h1>
+@jobs.sortBy(_.priorities.score())(Ordering[String].reverse).map { job =>
+	@jobData("Priorities", job, job.priorities)
+}
 
-@jobData(job: models.Job) = {
+<h1>@caption, by skills</h1>
+@jobs.sortBy(_.skills.score())(Ordering[String].reverse).map { job =>
+	@jobData("Skills", job, job.skills)
+}
+
+@jobData(label: String, job: models.Job, data: models.Criterion) = {
 	<h1>@job.id</h1>
-	<h2>Scores</h2>
-	<dl>
-		<dt>priority</dt>
-		<dd>@job.priorities.score()</dd>
-		<dt>skill</dt>
-		<dd>@job.skills.score()</dd>
-	</dl>
-	@jobDataDescription("Priorities", job.priorities)
-	@jobDataDescription("Skills", job.skills)
+	<h2>Score</h2>
+	@data.score()
+	@jobDataDescription(label, data)
 	@tags.attributes(job.attributes)
 }
 
