@@ -58,4 +58,9 @@ object Jobs {
     for (file <- new File(location).listFiles())
       yield models.Job(Json.parse(Source.fromFile(file).mkString), user)
   }
+
+  def sorted(criterion: models.Criterion, userData: List[Map[String, String]]) = {
+    criterion.data.toList.sortBy((jd: (String, _)) =>
+      userData.indexWhere(_("label") == jd._1, 0))
+  }
 }

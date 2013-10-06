@@ -5,36 +5,30 @@
 @criterionLabel match {
 
   case "priorities" => {
-    <h1>@caption, by @criterionLabel</h1>
-    @jobsSection(job => job.priorities)
+    <h1>@caption, by @criterionLabel.capitalize</h1>
+    @jobsSection(job => job.priorities, user => user.priorities)
   }
 
   case "skills" => {
-	<h1>@caption, by @criterionLabel</h1>
-    @jobsSection(job => job.skills)
+	<h1>@caption, by @criterionLabel.capitalize</h1>
+    @jobsSection(job => job.skills, user => user.skills)
   }
 }
 
-@jobsSection(criterionFun: Job => models.Criterion) = {
-	@jobs.sortBy(criterionFun(_).score())(Ordering[String].reverse).map { job =>
-		@jobData(criterionLabel.capitalize, job, criterionFun(job))
+@jobsSection(jobFun: Job => models.Criterion, userFun: User => List[Map[String, String]]) = {
+	@jobs.sortBy(jobFun(_).score())(Ordering[String].reverse).map { job =>
+		<h1>@job.id</h1>
+		<h2>Score</h2>
+		@jobFun(job).score()
+		<h2>@job.id</h2>
+		<dl>
+		@models.Jobs.sorted(jobFun(job), userFun(job.user)).map { criterion =>
+			@criterion match { case (key,value) =>
+				<dt>@key</dt>
+				<dd>@value("score"): @value("comment")</dd>
+			}
+		}
+		</dl>
+		@tags.attributes(job.attributes)
 	}
-}
-
-@jobData(label: String, job: models.Job, criterion: models.Criterion) = {
-	<h1>@job.id</h1>
-	<h2>Score</h2>
-	@criterion.score()
-	@jobDataDescription(label, criterion)
-	@tags.attributes(job.attributes)
-}
-
-@jobDataDescription(label: String, criterion: models.Criterion) = {
-	<h2>@label</h2>
-	<dl>
-	@criterion.data.map { p =>
-		<dt>@p._1</dt>
-		<dd>@p._2("score"): @p._2("comment")</dd>
-	}
-	</dl>
 }
