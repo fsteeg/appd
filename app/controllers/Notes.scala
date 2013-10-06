@@ -12,19 +12,24 @@ import java.util.Locale
 
 object Notes extends Controller {
 
+  val rssDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z")
+
   def index = Action {
     Ok(notesAsRss(Application.data("notes/"))).as("application/rss+xml")
   }
 
   def notesAsRss(root: String) = {
     val data = (loadAllFiles(root) sortBy (_._1))(Ordering[String].reverse)
-    Logger.info("data: " + data.toList)
+    Logger.trace("data: " + data.toList)
     rssFor(data).toString
   }
 
   def loadAllFiles(root: String) = {
-    (for (file <- new File(root).listFiles; src = Source.fromFile(file))
-      yield (file.getName().split("\\.")(0), parseToHtml(src.mkString)))
+    for (file <- new File(root).listFiles if !file.isHidden()) yield {
+      Logger.trace("Loading file: " + file)
+      val source = Source.fromFile(file).mkString
+      (file.getName().split("\\.")(0), parseToHtml(source))
+    }
   }
 
   def parseToHtml(source: String) =
@@ -56,8 +61,8 @@ object Notes extends Controller {
 
   def parseToRssTime(time: String) = {
     val inputFormat = new SimpleDateFormat("yyyy-mm-dd")
-    val outputFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z")
-    outputFormat.format(inputFormat.parse(time));
+    val outputFormat = rssDateFormat
+    outputFormat.format(inputFormat.parse(time))
   }
 
 }

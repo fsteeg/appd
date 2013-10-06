@@ -4,11 +4,11 @@ dl {
 
 dt {
 	float: left;
-	width: 100px;
+	width: 200px;
 	font-weight: bold;
 	text-align: right;
 }
 
 dd {
-	margin: 0 0 0 110px;
+	margin: 0 0 0 210px;
 }
