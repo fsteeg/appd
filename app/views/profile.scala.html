@@ -1,11 +1,10 @@
-@(user: models.User, jobs: Seq[Job])
+@(user: models.User)
 
 @import play.api.libs.json._
 
 @main("Profile") {
 	<h1>Profile</h1>
 	@userData(user)
-	@tags.jobs("Jobs", jobs)
 }
 
 @userData(profile: models.User) = {

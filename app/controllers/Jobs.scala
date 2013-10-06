@@ -2,17 +2,16 @@ package controllers
 
 import play.api._
 import play.api.mvc._
-import play.api.libs.json._
 import scala.io.Source
-import java.io.File
+import play.api.libs.json.Json
 import models.User
 import models.Users
 
-object Profile extends Controller {
+object Jobs extends Controller {
 
   def index = Action {
     val user = Users.fromFile("data/profile/fsteeg.json")
-    Ok(views.html.profile(user)).as("text/html; charset=utf-8")
+    val jobs = models.Jobs.fromDirectory("data/jobs/", user)
+    Ok(views.html.jobs(user, jobs)).as("text/html; charset=utf-8")
   }
-
 }

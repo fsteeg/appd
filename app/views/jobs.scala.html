@@ -1,0 +1,5 @@
+@(user: models.User, jobs: Seq[Job])
+
+@main("Jobs") {
+	@tags.jobs("Jobs", jobs)
+}

@@ -28,7 +28,7 @@ class ProfileSpec extends Specification {
       contentType(home) must beSome.which(_ == "text/html")
       contentAsString(home) must contain("fsteeg")
       contentAsString(home) must contain("Tätigkeit")
-      contentAsString(home) must contain("hbz")
+      contentAsString(home) must contain("Eclipse")
     }
   }
 

@@ -11,4 +11,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /profile                    controllers.Profile.index
 GET     /notes                      controllers.Notes.index
 GET     /posts                      controllers.Posts.index
+GET     /jobs                       controllers.Jobs.index
 GET     /projects                   controllers.Projects.index
