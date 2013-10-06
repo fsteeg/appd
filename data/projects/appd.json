@@ -1,5 +1,6 @@
 {
 	"id":"appd",
+	"location":{"lat":50.9592435071429,"lon":6.92095992857143},
 	"attributes":{
 		"user":"fsteeg",
 		"label":"appd",

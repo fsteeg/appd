@@ -1,0 +1,30 @@
+@(lon: Double, lat: Double, id: String)
+
+<div class="map" id="map-@id"></div>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script>
+$(function() {
+    $("#unobtrusive-@id").click(function(e) {
+      e.preventDefault();
+      $("#map-@id").css('height', '150px')
+      map = new OpenLayers.Map("map-@id");
+      map.addLayer(new OpenLayers.Layer.OSM());
+      var lonLat = new OpenLayers.LonLat(@lon, @lat)
+            .transform(
+              new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+              map.getProjectionObject() // to Spherical Mercator Projection
+            );
+      var markers = new OpenLayers.Layer.Markers("Markers");
+      map.addLayer(markers);
+      var size = new OpenLayers.Size(21,25);
+      var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+      var icon = new OpenLayers.Icon('http://maps.gstatic.com/intl/de_de/mapfiles/ms/micons/red-pushpin.png', size, offset);
+      markers.addMarker(new OpenLayers.Marker(lonLat, icon));
+      map.setCenter(lonLat, 16);
+      controls = map.getControlsByClass('OpenLayers.Control.Navigation');
+      for(var i = 0; i < controls.length; ++i) controls[i].disableZoomWheel();
+      $("#unobtrusive-@id").remove()
+    });
+  });
+</script>
+<a id="unobtrusive-@id" href="#">@lon, @lat</a>

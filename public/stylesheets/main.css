@@ -12,3 +12,8 @@ dt {
 dd {
 	margin: 0 0 0 210px;
 }
+
+.map {
+	float: none;
+	width: 100%;
+}

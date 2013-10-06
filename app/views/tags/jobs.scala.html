@@ -1,6 +1,7 @@
 @(caption: String, jobs: Seq[Job], criterionLabel: String)
 
 @import play.api.libs.json._
+@import tags.map
 
 @criterionLabel match {
 
@@ -18,9 +19,11 @@
 @jobsSection(jobFun: Job => models.Criterion, userFun: User => List[Map[String, String]]) = {
 	@jobs.sortBy(jobFun(_).score())(Ordering[String].reverse).map { job =>
 		<h1>@job.id</h1>
+		<h2>Location</h2>
+		@map(job.location("lon"), job.location("lat"), job.id.hashCode.toString)
 		<h2>Score</h2>
 		@jobFun(job).score()
-		<h2>@job.id</h2>
+		<h2>@criterionLabel.capitalize</h2>
 		<dl>
 		@models.Jobs.sorted(jobFun(job), userFun(job.user)).map { criterion =>
 			@criterion match { case (key,value) =>
