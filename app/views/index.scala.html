@@ -1,3 +1,5 @@
+@(notesRss: String, postsRss: String)
+
 @import scala.xml.XML
 
 @rss(name: String, feed: String) = {
@@ -8,6 +10,6 @@
 }
 
 @main("Welcome to appd") {
-	@rss("Notes", Notes.notesAsRss("data/notes").toString)
-	@rss("Posts", Notes.notesAsRss("data/posts").toString)
+	@rss("Notes", notesRss)
+	@rss("Posts", postsRss)
 }

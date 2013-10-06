@@ -10,8 +10,8 @@ import models.Users
 object Projects extends Controller {
 
   def index(criterion: String) = Action {
-    val user = Users.fromFile("data/profile/fsteeg.json")
-    val jobs = models.Jobs.fromDirectory("data/projects/", user)
+    val user = Users.fromFile(Application.data("profile/fsteeg.json"))
+    val jobs = models.Jobs.fromDirectory(Application.data("projects/"), user)
     Ok(views.html.projects(user, jobs, criterion)).as("text/html; charset=utf-8")
   }
 }

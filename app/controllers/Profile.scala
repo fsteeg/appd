@@ -11,7 +11,7 @@ import models.Users
 object Profile extends Controller {
 
   def index = Action {
-    val user = Users.fromFile("data/profile/fsteeg.json")
+    val user = Users.fromFile(Application.data("profile/fsteeg.json"))
     Ok(views.html.profile(user)).as("text/html; charset=utf-8")
   }
 

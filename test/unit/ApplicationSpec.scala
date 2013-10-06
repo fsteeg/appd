@@ -5,21 +5,14 @@ import org.specs2.runner._
 import org.junit.runner._
 import play.api.test._
 import play.api.test.Helpers._
+import controllers.Application
 
-/**
- * Add your spec here.
- * You can mock out a whole application including requests, plugins etc.
- * For more information, consult the wiki.
- */
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
-
   "Application" should {
-
     "send 404 on a bad request" in new WithApplication{
       route(FakeRequest(GET, "/boum")) must beNone
     }
-
     "render the index page" in new WithApplication{
       val home = route(FakeRequest(GET, "/")).get
       status(home) must equalTo(OK)
@@ -27,6 +20,9 @@ class ApplicationSpec extends Specification {
       contentAsString(home) must contain ("Notes")
       contentAsString(home) must contain ("A sample note")
       contentAsString(home) must contain ("A sample post")
+    }
+    "provide access to the Appd data location" in  {
+      Application.data("") must endWith ("data/")
     }
   }
 }

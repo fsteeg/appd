@@ -13,7 +13,7 @@ import java.util.Locale
 object Notes extends Controller {
 
   def index = Action {
-    Ok(notesAsRss("data/notes")).as("application/rss+xml")
+    Ok(notesAsRss(Application.data("notes/"))).as("application/rss+xml")
   }
 
   def notesAsRss(root: String) = {
