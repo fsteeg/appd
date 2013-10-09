@@ -9,34 +9,31 @@
 		"user":"fsteeg"
 	},
 	"priorities":{
-		"Ort":{
+		"location":{
 			"score":"9",
 			"comment":"Köln"
 		},
-		"Tätigkeit":{
+		"activity":{
 			"score":"9",
-			"comment":"Entwickeln"
+			"comment":"developer position"
 		},
-		"Perspektive":{
+		"perspective":{
 			"score":"8",
-			"comment":"langjährig etablierte Firma"
+			"comment":"established company"
 		},
-		"Arbeitsbed.":{
+		"conditions":{
 			"score":"0",
-			"comment":"unklar"
+			"comment":"unknown"
 		}
-		
 	},
 	"skills":{
 		"Java":{
 			"score":"9",
-			"comment":"Java EE"
+			"comment":"Java position"
 		},
-		"Eclipse":{
-			"score":"2",
-			"comment":"als IDE"
+		"Scala":{
+			"score":"1",
+			"comment":"probably not"
 		}
-		
 	}
-	
 }

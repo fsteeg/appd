@@ -13,7 +13,7 @@ object Application extends Controller {
   }
 
   def data(kind: String): String = {
-    val default = "data/"
+    val default = "test/data/"
     (Play.maybeApplication match {
       case Some(application) => application.configuration.getString("appd.data").getOrElse(default)
       case None => default

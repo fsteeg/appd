@@ -7,31 +7,31 @@
 		"description":"Eclipse GEF Zest"
 	},
 	"priorities":{
-		"Ort":{
+		"location":{
 			"score":"9",
-			"comment":"zuhause"
+			"comment":"home"
 		},
-		"Tätigkeit":{
+		"activity":{
 			"score":"8",
-			"comment":"Entwickeln, Maintenance"
+			"comment":"programming, maintenance"
 		},
-		"Perspektive":{
+		"perspective":{
 			"score":"8",
-			"comment":"Eclipse GEF"
+			"comment":"Eclipse project"
 		},
-		"Arbeitsbed.":{
+		"conditions":{
 			"score":"9",
-			"comment":"zuhause"
+			"comment":"home"
 		}
 	},
 	"skills":{
 		"Java":{
 			"score":"9",
-			"comment":"voll"
+			"comment":"Java project"
 		},
-		"Eclipse":{
-			"score":"9",
-			"comment":"voll"
+		"Scala":{
+			"score":"1",
+			"comment":"none"
 		}
 	}
 }

@@ -1,0 +1,45 @@
+{
+	"id":"hbz",
+	"location":{
+		"lon":6.935512,
+		"lat":50.93406
+	},
+	"attributes":{
+		"name":"hbz",
+		"user":"fsteeg"
+	},
+	"priorities":{
+		"location":{
+			"score":"9",
+			"comment":"Köln"
+		},
+		"activity":{
+			"score":"9",
+			"comment":"developer position"
+		},
+		"perspective":{
+			"score":"9",
+			"comment":"service and development agency in the public sector"
+		},
+		"conditions":{
+			"score":"8",
+			"comment":"quiet, good (but not great) office equipment"
+		}
+	},
+	"skills":{
+		"Java":{
+			"score":"9",
+			"comment":"Java main language"
+		},
+		"Scala":{
+			"score":"6",
+			"comment":"Play with Java, but Scala in templates"
+		}
+	},
+	"links":[
+		{
+			"label":"homepage",
+			"url":"http://www.hbz-nrw.de"
+		}
+	]
+}

@@ -1,0 +1,35 @@
+{
+	"id":"fsteeg",
+	"attributes":{
+		"name":"Fabian",
+		"mail":"fsteeg@gmail.com"
+	},
+	"priorities":[
+		{
+			"label":"location",
+			"comment":"close by, reachable by bicycle"
+		},
+		{
+			"label":"activity",
+			"comment":"what you actually do (programming) and don't do (meetings)"
+		},
+		{
+			"label":"perspective",
+			"comment":"is there a sustainable perspective"
+		},
+		{
+			"label":"conditions",
+			"comment":"hours, offices, etc."
+		}
+	],
+	"skills":[
+		{
+			"label":"Java",
+			"comment":"10 years"
+		},
+		{
+			"label":"Scala",
+			"comment":"5 years"
+		}
+	]
+}

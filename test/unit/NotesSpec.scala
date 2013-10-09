@@ -12,18 +12,16 @@ import controllers.Application
 
 @RunWith(classOf[JUnitRunner])
 class NotesSpec extends Specification {
-
   "Notes" should {
-    "return an RSS feed, sorted from latest to oldest" in new WithApplication {
+    "be an RSS feed, sorted from latest to oldest" in new WithApplication {
       val home = route(FakeRequest(GET, "/notes")).get
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "application/rss+xml")
       contentAsString(home) must equalTo(Notes.notesAsRss(Application.data("notes/")))
       val pubDates = XML.loadString(contentAsString(home)) \\ "pubDate"
       val firstDate = Notes.rssDateFormat.parse(pubDates.head.text)
-      Logger.trace(firstDate.toString())
       val lastDate = Notes.rssDateFormat.parse(pubDates.last.text)
-      Logger.trace(lastDate.toString())
+      Logger.trace(s"First date: $firstDate, last date: $lastDate")
       firstDate.after(lastDate) must beTrue
     }
   }
