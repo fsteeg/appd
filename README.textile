@@ -4,6 +4,8 @@ _Appd: a programmer's personal dashboard_
 
 At this point, this is barely a sketch.
 
+!https://travis-ci.org/fsteeg/appd.png!
+
 h1. Setup
 
 @git clone https://github.com/fsteeg/appd.git@
