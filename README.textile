@@ -4,7 +4,7 @@ _Appd: a programmer's personal dashboard_
 
 At this point, this is barely a sketch.
 
-!https://travis-ci.org/fsteeg/appd.png!
+!https://travis-ci.org/fsteeg/appd.png?branch=master!:https://travis-ci.org/fsteeg/appd
 
 h1. Setup
 
