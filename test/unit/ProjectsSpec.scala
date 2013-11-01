@@ -5,6 +5,7 @@ import org.specs2.runner._
 import org.junit.runner._
 import play.api.test._
 import play.api.test.Helpers._
+import Helpers._
 
 @RunWith(classOf[JUnitRunner])
 class ProjectsSpec extends Specification {
@@ -34,6 +35,18 @@ class ProjectsSpec extends Specification {
       content must contain("59")
       content must contain("Skills")
       content must contain("Attributes")
+    }
+    "support text/html content" in {
+      "text/html" must beAcceptedBy(controllers.Projects.index("skills"))
+      "text/html" must beAcceptedBy(controllers.Projects.index("priorities"))
+    }
+    "support application/json content" in {
+      "application/json" must beAcceptedBy(controllers.Projects.index("skills"))
+      "application/json" must beAcceptedBy(controllers.Projects.index("priorities"))
+    }
+    "return valid JSON" in {
+      controllers.Projects.index("skills") must returnValidJson
+      controllers.Projects.index("priorities") must returnValidJson
     }
   }
 }

@@ -5,6 +5,10 @@ import org.specs2.runner._
 import org.junit.runner._
 import play.api.test._
 import play.api.test.Helpers._
+import org.specs2.matcher.Matcher
+import play.api.mvc.AnyContent
+import play.api.mvc.Action
+import Helpers._
 
 @RunWith(classOf[JUnitRunner])
 class JobsSpec extends Specification {
@@ -34,6 +38,18 @@ class JobsSpec extends Specification {
       content must contain("91")
       content must contain("Skills")
       content must contain("Attributes")
+    }
+    "support text/html content" in {
+      "text/html" must beAcceptedBy(controllers.Jobs.index("skills"))
+      "text/html" must beAcceptedBy(controllers.Jobs.index("priorities"))
+    }
+    "support application/json content" in {
+      "application/json" must beAcceptedBy(controllers.Jobs.index("skills"))
+      "application/json" must beAcceptedBy(controllers.Jobs.index("priorities"))
+    }
+    "return valid JSON" in {
+      controllers.Jobs.index("skills") must returnValidJson
+      controllers.Jobs.index("priorities") must returnValidJson
     }
   }
 }

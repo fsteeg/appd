@@ -9,9 +9,12 @@ import models.Users
 
 object Projects extends Controller {
 
-  def index(criterion: String) = Action {
+  def index(criterion: String) = Action { implicit request =>
     val user = Users.fromFile(Application.data("profile/fsteeg.json"))
     val jobs = models.Jobs.fromDirectory(Application.data("projects/"), user)
-    Ok(views.html.projects(user, jobs, criterion)).as("text/html; charset=utf-8")
+    render {
+      case Accepts.Html() => Ok(views.html.projects(user, jobs, criterion))
+      case Accepts.Json() => Ok(Json.arr(jobs.map(_.json)))
+    }
   }
 }
