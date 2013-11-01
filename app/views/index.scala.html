@@ -1,19 +1,8 @@
-@(publicRss: List[scala.xml.Elem], privateRss: List[scala.xml.Elem])
+@(publicFeeds: List[(scala.xml.Elem, String)], privateFeeds: List[(scala.xml.Elem, String)])
 
 @import scala.xml.XML
 
-@rss(name: String, feeds: List[scala.xml.Elem]) = {
-	<h1>@name</h1>
-	@for(feed <- feeds) {
-		<h2>@{(feed \\ "title")(0).text}</h2>
-		@for(item <- (feed \\ "item") take 5) {
-			<h3><a href="@{(item \ "link").text}">@Html((item \ "title").text)</h3></a>
-			<p>@Html((item \ "description").text)</p>
-		}
-	}
-}
-
 @main("Welcome to appd") {
-	<div class="public"> @rss("Public", publicRss) </div>
-	<div class="private"> @rss("Private", privateRss) </div>
+	<div class="public"> @tags.feed("Public", publicFeeds) </div>
+	<div class="private"> @tags.feed("Private", privateFeeds) </div>
 }

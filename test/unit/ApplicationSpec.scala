@@ -23,6 +23,10 @@ class ApplicationSpec extends Specification {
         r.body must contain("Public")
         r.body must contain("Private")
         r.body must contain("Notes RSS feed")
+        r.body must contain("BibSonomy bookmarks")
+        r.body must contain("BibSonomy publications")
+        r.body must contain("Activity")
+        r.body must contain("Stack Overflow")
       }
     }
     "provide access to the Appd data location" in {

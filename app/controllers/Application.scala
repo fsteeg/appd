@@ -32,17 +32,18 @@ object Application extends Controller {
   }
 
   private def contentType(urlConnection: URLConnection) = {
-    urlConnection.setRequestProperty("Accept", "application/rss+xml")
+    urlConnection.setRequestProperty("Accept", "application/rss+xml, application/atom+xml")
     val contentType = urlConnection.getContentType().split(";")(0)
     Logger.info(s"Getting content type '$contentType' from '${urlConnection.getURL}'")
     contentType
   }
 
-  private def loadRss(feeds: List[String]): List[Elem] = {
+  private def loadRss(feeds: List[String]): List[(Elem, String)] = {
     for (
       feed <- feeds;
       urlConnection = new URL(feed).openConnection();
-      if (List("text/xml", "application/xml", "application/rss+xml") contains contentType(urlConnection))
-    ) yield scala.xml.XML.load(urlConnection.getInputStream)
+      content = contentType(urlConnection);
+      if (List("text/xml", "application/xml", "application/rss+xml", "application/atom+xml") contains content)
+    ) yield (scala.xml.XML.load(urlConnection.getInputStream), content)
   }
 }
