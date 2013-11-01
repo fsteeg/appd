@@ -34,11 +34,11 @@ object Application extends Controller {
   private def contentType(urlConnection: URLConnection) = {
     urlConnection.setRequestProperty("Accept", "application/rss+xml, application/atom+xml")
     val contentType = urlConnection.getContentType().split(";")(0)
-    Logger.info(s"Getting content type '$contentType' from '${urlConnection.getURL}'")
+    Logger.trace(s"Getting content type '$contentType' from '${urlConnection.getURL}'")
     contentType
   }
 
-  private def loadRss(feeds: List[String]): List[(Elem, String)] = {
+  def loadRss(feeds: List[String]): List[(Elem, String)] = {
     for (
       feed <- feeds;
       urlConnection = new URL(feed).openConnection();

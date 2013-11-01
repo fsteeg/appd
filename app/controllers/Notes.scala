@@ -9,19 +9,19 @@ import org.clapper.markwrap.MarkupType
 import java.text.SimpleDateFormat
 import java.text.DateFormat
 import java.util.Locale
+import scala.xml.Elem
 
 object Notes extends Controller {
 
   val rssDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z")
 
-  def index = Action {
-    Ok(notesAsRss(Application.data("notes/"))).as("application/rss+xml")
-  }
+  def index = content(Application.data("notes/"))
 
-  def notesAsRss(root: String) = {
-    val data = (loadAllFiles(root) sortBy (_._1))(Ordering[String].reverse)
-    Logger.trace("data: " + data.toList)
-    rssFor(data)
+  def content(data: String) = Action { implicit request =>
+    render {
+      case Accepts.Html() => Ok(html(data)).as("text/html")
+      case _ => Ok(rss(data)).as("application/rss+xml")
+    }
   }
 
   def loadAllFiles(root: String) = {
@@ -35,7 +35,14 @@ object Notes extends Controller {
   def parseToHtml(source: String) =
     MarkWrap.parserFor(MarkupType.Textile).parseToHTML(source)
 
-  def rssFor(data: Seq[(String, String)]) = {
+  def html(data: String) =
+    scala.xml.XML.loadString(
+      views.html.tags.feed.render(
+        data, List((rss(data), "application/rss+xml"))).body)
+
+  def rss(location: String) = {
+    val data = (loadAllFiles(location) sortBy (_._1))(Ordering[String].reverse)
+    Logger.trace("data: " + data.toList)
     val latestRssTime = parseToRssTime(data.head._1)
     <rss version="2.0">
       <channel>

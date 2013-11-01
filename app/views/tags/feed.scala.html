@@ -1,22 +1,23 @@
 @(name: String, feeds: List[(scala.xml.Elem, String)])
-
-<h1>@name</h1>
-@for((feed,contentType) <- feeds) {
-	@contentType match {
-		case "application/atom+xml" => {
-			<h2>@{(feed \ "title").text}</h2>
-			@for(item <- (feed \\ "entry") take 5) {
-				<h3><a href="@{(item \ "link" \ "@href").text}">@((item \ "title").text)</h3></a>
-				<p>@Html((item \ "summary").text)</p>
-				<p>@Html((item \ "content").text)</p>
+<div>
+	<h1>@name</h1>
+	@for((feed,contentType) <- feeds) {
+		@contentType match {
+			case "application/atom+xml" => {
+				<h2>@{(feed \ "title").text}</h2>
+				@for(item <- (feed \\ "entry") take 5) {
+					<h3><a href="@{(item \ "link" \ "@href").text}">@((item \ "title").text)</a></h3>
+					<p>@Html((item \ "summary").text)</p>
+					<p>@Html((item \ "content").text)</p>
+				}
 			}
-		}
-		case _ => {
-			<h2>@{(feed \ "channel" \ "title").text}</h2>
-			@for(item <- (feed \\ "item") take 5) {
-				<h3><a href="@{(item \ "link").text}">@((item \ "title").text)</h3></a>
-				<p>@Html((item \ "description").text)</p>
+			case _ => {
+				<h2>@{(feed \ "channel" \ "title").text}</h2>
+				@for(item <- (feed \\ "item") take 5) {
+					<h3><a href="@{(item \ "link").text}">@((item \ "title").text)</a></h3>
+					<p>@Html((item \ "description").text)</p>
+				}
 			}
 		}
 	}
-}
+</div>
