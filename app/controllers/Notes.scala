@@ -21,7 +21,7 @@ object Notes extends Controller {
   def notesAsRss(root: String) = {
     val data = (loadAllFiles(root) sortBy (_._1))(Ordering[String].reverse)
     Logger.trace("data: " + data.toList)
-    rssFor(data).toString
+    rssFor(data)
   }
 
   def loadAllFiles(root: String) = {

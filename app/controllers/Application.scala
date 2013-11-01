@@ -3,13 +3,24 @@ package controllers
 import play.api._
 import play.api.mvc._
 import com.typesafe.config.Config
+import java.net.URLConnection
+import java.net.HttpURLConnection
+import java.net.URL
+import scala.xml.Elem
 
 object Application extends Controller {
 
-  def index = Action {
+  def index = Action { implicit request =>
     Ok(views.html.index(
-      Notes.notesAsRss(data("notes/")).toString,
-      Notes.notesAsRss(data("posts/")).toString))
+      loadRss(List(
+        "http://www.bibsonomy.org/rss/user/fsteeg",
+        "http://www.bibsonomy.org/publrss/user/fsteeg",
+        "http://fsteeg.com/feed",
+        "https://github.com/fsteeg",
+        "http://stackoverflow.com/feeds/user/18154",
+        routes.Posts.index.absoluteURL())),
+      loadRss(List(
+        routes.Notes.index.absoluteURL()))))
   }
 
   def data(kind: String): String = {
@@ -18,5 +29,20 @@ object Application extends Controller {
       case Some(application) => application.configuration.getString("appd.data").getOrElse(default)
       case None => default
     }) + kind
+  }
+
+  private def contentType(urlConnection: URLConnection) = {
+    urlConnection.setRequestProperty("Accept", "application/rss+xml")
+    val contentType = urlConnection.getContentType().split(";")(0)
+    Logger.info(s"Getting content type '$contentType' from '${urlConnection.getURL}'")
+    contentType
+  }
+
+  private def loadRss(feeds: List[String]): List[Elem] = {
+    for (
+      feed <- feeds;
+      urlConnection = new URL(feed).openConnection();
+      if (List("text/xml", "application/xml", "application/rss+xml") contains contentType(urlConnection))
+    ) yield scala.xml.XML.load(urlConnection.getInputStream)
   }
 }

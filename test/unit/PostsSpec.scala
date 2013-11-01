@@ -17,7 +17,7 @@ class PostsSpec extends Specification {
       val home = route(FakeRequest(GET, "/posts")).get
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "application/rss+xml")
-      contentAsString(home) must equalTo(Notes.notesAsRss(Application.data("posts/")))
+      XML.loadString(contentAsString(home)) must equalTo(Notes.notesAsRss(Application.data("posts/")))
       val pubDates = XML.loadString(contentAsString(home)) \\ "pubDate"
       val firstDate = Notes.rssDateFormat.parse(pubDates.head.text)
       val lastDate = Notes.rssDateFormat.parse(pubDates.last.text)

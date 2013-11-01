@@ -17,7 +17,7 @@ class NotesSpec extends Specification {
       val home = route(FakeRequest(GET, "/notes")).get
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "application/rss+xml")
-      contentAsString(home) must equalTo(Notes.notesAsRss(Application.data("notes/")))
+      XML.loadString(contentAsString(home)) must equalTo(Notes.notesAsRss(Application.data("notes/")))
       val pubDates = XML.loadString(contentAsString(home)) \\ "pubDate"
       val firstDate = Notes.rssDateFormat.parse(pubDates.head.text)
       val lastDate = Notes.rssDateFormat.parse(pubDates.last.text)

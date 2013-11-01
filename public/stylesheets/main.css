@@ -17,3 +17,13 @@ dd {
 	float: none;
 	width: 100%;
 }
+
+.public {
+    float: left;
+    width: 50%;
+}
+
+.private {
+    float: right;
+    width: 50%;
+}

@@ -1,15 +1,19 @@
-@(notesRss: String, postsRss: String)
+@(publicRss: List[scala.xml.Elem], privateRss: List[scala.xml.Elem])
 
 @import scala.xml.XML
 
-@rss(name: String, feed: String) = {
+@rss(name: String, feeds: List[scala.xml.Elem]) = {
 	<h1>@name</h1>
-	@for(item <- (XML.loadString(feed) \\ "item")) {
-		@Html((item \ "description").text)
+	@for(feed <- feeds) {
+		<h2>@{(feed \\ "title")(0).text}</h2>
+		@for(item <- (feed \\ "item") take 5) {
+			<h3><a href="@{(item \ "link").text}">@Html((item \ "title").text)</h3></a>
+			<p>@Html((item \ "description").text)</p>
+		}
 	}
 }
 
 @main("Welcome to appd") {
-	@rss("Notes", notesRss)
-	@rss("Posts", postsRss)
+	<div class="public"> @rss("Public", publicRss) </div>
+	<div class="private"> @rss("Private", privateRss) </div>
 }
