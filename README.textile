@@ -16,7 +16,15 @@ h1. Usage
 
 @../play-2.2.0/play run@ and visit @http://localhost:9000@
 
+The basic idea is to provide an overview of your notes, posts, profile, jobs, and projects. Notes and posts are streams of private and public writing. Your profile defines your priorities and skills, which are used to rank past, present, and potential jobs and projects.
+
+It's implemented as a web application based on plain text, JSON, RSS, and HTML.
+
+!https://raw.github.com/fsteeg/appd/master/public/docs/appd.png!
+
 h1. Data
 
-There is test data under @test/data@. A different location can be provided in @conf/application.conf@.
+There is test data under @test/data@.
+
+A different location and external feeds can be provided in @conf/application.conf@.
 

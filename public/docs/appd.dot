@@ -1,0 +1,38 @@
+graph appd {
+	node[shape=box style=filled]
+	edge[style=dotted]
+	rankdir=LR
+
+	json[label="json\ndata" fillcolor=none]
+	wikitext[label="wikitext\ndata" fillcolor=none]
+
+	subgraph cluster_data_routes {
+		label="Accept:\ntext/html,\napplication/json"
+		profileRoute[label="/profile"]
+		jobsRoute[label="/jobs"]
+		projectsRoute[label="/projects"]
+	}
+
+	subgraph cluster_feed_routes {
+		label="Accept:\ntext/html,\napplication/rss+xml"
+		notesRoute[label="/notes"]
+		postsRoute[label="/posts"]
+	}
+
+	dataViews[label="html, json\nclients" fillcolor=none]
+	feedViews[label="html, rss\nclients" fillcolor=none]
+
+	json -- profileRoute
+	json -- jobsRoute
+	json -- projectsRoute
+
+	wikitext -- notesRoute
+	wikitext -- postsRoute
+
+	notesRoute -- feedViews
+	postsRoute -- feedViews
+
+	profileRoute -- dataViews
+	jobsRoute -- dataViews
+	projectsRoute -- dataViews
+}
